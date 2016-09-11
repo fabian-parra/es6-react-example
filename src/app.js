@@ -9,14 +9,19 @@ class App extends Component {
     this.state = { data: [] }
   }
 
-  componentDidMount(){
+  fetchComments(){
     axios.get(this.props.url)
-      .then((response) => {
-        this.setState({data: response.data})
-      })
-      .catch((error) => {
-        console.log('Error en llamada json',error)
-      })
+    .then((response) => {
+      this.setState({data: response.data})
+    })
+    .catch((error) => {
+      console.log('Error en llamada json',error)
+    })
+  }
+
+  componentDidMount(){
+    this.fetchComments()
+    setInterval(this.fetchComments.bind(this), this.props.refreshInterval)
   }
 
   render(){
