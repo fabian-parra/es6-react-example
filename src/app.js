@@ -11,12 +11,18 @@ class App extends Component {
 
   fetchComments(){
     axios.get(this.props.url)
-    .then((response) => {
-      this.setState({data: response.data})
-    })
-    .catch((error) => {
-      console.log('Error en llamada json',error)
-    })
+      .then((response) => {
+        this.setState({data: response.data})
+      })
+  }
+
+  addComment(comment) {
+    axios.post(this.props.url,
+        { comment },
+        { headers: {'Content-Type': 'application/json'} })
+      .then((response) => {
+        this.setState({data: response.data})
+      })
   }
 
   componentDidMount(){
@@ -26,7 +32,7 @@ class App extends Component {
 
   render(){
     return(
-      <CommentBox data={this.state.data}/>    
+      <CommentBox data={this.state.data} addComment={this.addComment.bind(this)}/>    
     )
   }
 }

@@ -9,7 +9,7 @@ class CommentBox extends Component {
       <div className='commentBox'>
         <h1>Caja de comentarios</h1>
         <CommentList comments={this.props.data}/>
-        <CommentForm />
+        <CommentForm addComment={this.props.addComment}/>
       </div>    
     )
   }
